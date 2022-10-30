@@ -3,8 +3,12 @@ import Link from 'next/link';
 import { DataStore } from 'aws-amplify';
 import { useState, useEffect } from 'react';
 import { Movie } from '../src/models'
+import { Notifications } from 'aws-amplify';
+import { withInAppMessaging } from '@aws-amplify/ui-react';
 
-export default function Home() {
+const { InAppMessaging } = Notifications;
+
+function Home() {
   const [movies, setMovies] = useState([])
   useEffect(() => {
     const fetchMovies = () => {
@@ -14,6 +18,18 @@ export default function Home() {
     fetchMovies()
     DataStore.observe(Movie).subscribe(() => fetchMovies())
   }, [])
+
+  useEffect(() => {
+    InAppMessaging.syncMessages();
+  }, [])
+
+  if (movies.length === 0) {
+    return (
+      <div>
+        <p> Loading...</p>
+      </div>
+    )
+  }
   return (
     <div className={styles.container}>
       <div className={styles.movieHeader}>
@@ -29,16 +45,22 @@ export default function Home() {
 
 
       <div className={styles.grid}>
-        {movies.map(movie => (
+        {movies ? movies.map(movie => (
           <div className={styles.card} key={movie.id}>
             <img src={movie.image} alt={movie.title} />
             <h3> {movie.title}</h3>
             <p> {movie.description.slice(0, 80)}</p>
           </div>
-        ))}
+        )) : (
+          <>
+            <p className={styles.description}> No movie has been added </p>
+          </>
+        )}
 
 
       </div>
     </div>
   )
 }
+
+export default withInAppMessaging(Home);

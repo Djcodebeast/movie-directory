@@ -3,6 +3,13 @@ import { useState } from 'react'
 import { Movie } from '../src/models'
 import { DataStore } from 'aws-amplify'
 import { useRouter } from 'next/router'
+import { Notifications } from 'aws-amplify';
+import { withInAppMessaging } from '@aws-amplify/ui-react';
+import "@aws-amplify/ui-react/styles.css";
+
+
+const { InAppMessaging } = Notifications;
+const myMovieEvent = { name: 'movies_event' };
 
 const AddMovie = () => {
     const router = useRouter()
@@ -34,9 +41,11 @@ const AddMovie = () => {
             alert('fill in all the fields')
             return;
         };
-
-        router.push('/')
-        console.log(form.title)
+        InAppMessaging.syncMessages();
+        InAppMessaging.dispatchEvent(myMovieEvent)
+        setTimeout(() => {
+            router.push('/')
+        }, 15000)
     }
 
 
@@ -68,4 +77,4 @@ const AddMovie = () => {
     )
 }
 
-export default AddMovie
+export default withInAppMessaging(AddMovie);

@@ -1,0 +1,22 @@
+{
+  "appName": "moviedirectory",
+  "roleName": "pinpointLambdaRolead5dda0b",
+  "cloudformationPolicyName": "cloudformationPolicyad5dda0b",
+  "cloudWatchPolicyName": "cloudWatchPolicyad5dda0b",
+  "pinpointPolicyName": "pinpointPolicyad5dda0b",
+  "authPolicyName": "pinpoint_amplify_ad5dda0b",
+  "unauthPolicyName": "pinpoint_amplify_ad5dda0b",
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "authRoleArn": {
+    "Fn::GetAtt": [
+      "AuthRole",
+      "Arn"
+    ]
+  },
+  "pinpointInAppMessagingPolicyName": "pinpointInAppMessagingPolicyNamead5dda0b"
+}

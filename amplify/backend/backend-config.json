@@ -16,5 +16,37 @@
         }
       }
     }
+  },
+  "auth": {
+    "moviedirectory": {
+      "service": "Cognito",
+      "serviceType": "managed",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": []
+        },
+        "mfaTypes": [],
+        "verificationMechanisms": []
+      }
+    }
+  },
+  "analytics": {
+    "moviedirectory": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "notifications": {
+    "moviedirectory": {
+      "service": "Pinpoint",
+      "channels": [
+        "InAppMessaging"
+      ]
+    }
   }
 }

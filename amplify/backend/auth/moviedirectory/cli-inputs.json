@@ -1,0 +1,12 @@
+{
+  "version": "1",
+  "cognitoConfig": {
+    "identityPoolName": "moviedirectory_identitypool_462900e6",
+    "allowUnauthenticatedIdentities": true,
+    "authSelections": "identityPoolOnly",
+    "resourceName": "moviedirectory",
+    "sharedId": "462900e6",
+    "serviceName": "Cognito",
+    "useDefault": "manual"
+  }
+}
