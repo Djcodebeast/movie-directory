@@ -43,9 +43,9 @@ const AddMovie = () => {
         };
         InAppMessaging.syncMessages();
         InAppMessaging.dispatchEvent(myMovieEvent)
-        setTimeout(() => {
-            router.push('/')
-        }, 15000)
+        // setTimeout(() => {
+        //     router.push('/')
+        // }, 15000)
     }
 
 

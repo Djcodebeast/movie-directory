@@ -3,10 +3,6 @@ import Link from 'next/link';
 import { DataStore } from 'aws-amplify';
 import { useState, useEffect } from 'react';
 import { Movie } from '../src/models'
-import { Notifications } from 'aws-amplify';
-import { withInAppMessaging } from '@aws-amplify/ui-react';
-
-const { InAppMessaging } = Notifications;
 
 function Home() {
   const [movies, setMovies] = useState([])
@@ -16,7 +12,10 @@ function Home() {
       DataStore.query(Movie).then(setMovies);
     }
     fetchMovies()
-    DataStore.observe(Movie).subscribe(() => fetchMovies())
+    const sub = DataStore.observe(Movie).subscribe(() => fetchMovies());
+    return () => {
+      sub.unsubscribe();
+    };
   }, [])
 
   useEffect(() => {
@@ -63,4 +62,4 @@ function Home() {
   )
 }
 
-export default withInAppMessaging(Home);
+export default Home;
